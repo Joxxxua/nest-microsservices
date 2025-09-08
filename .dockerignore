@@ -1,0 +1,8 @@
+# Ignorar a pasta de módulos do Node local
+node_modules
+
+# Ignorar a pasta de build local
+dist
+
+# IGNORAR O ARQUIVO .env E QUALQUER OUTRO ARQUIVO SENSÍVEL
+.env
