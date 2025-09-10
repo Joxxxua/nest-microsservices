@@ -22,15 +22,21 @@ services:
   auth:
     build:
       context: .
-      dockerfile: ./apps/auth/Dockerfile
+      dockerfile: ./apps/auth/Dockerfile 
       target: development
     command: npm run start:dev auth
+    container_name: auth_app
     ports:
-      - '3001:3001'
+      - '3001:3001' 
     volumes:
       - .:/usr/src/app
       - /usr/src/app/node_modules
-
+    environment:
+      NODE_ENV: production
+      MONGODB_URI: mongodb://mongodb:27017/auth 
+      PORT: 3001 # 
+    depends_on:
+      - mongodb
   # Serviço do Banco de Dados MongoDB
   mongodb:
     image: mongo:6

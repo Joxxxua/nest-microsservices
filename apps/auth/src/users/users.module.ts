@@ -11,6 +11,7 @@ import { UsersRepository } from './users.repository';
     [
       ConfigModule.forRoot({
         isGlobal: true,
+        ignoreEnvFile: process.env.NODE_ENV === 'production',
       }),
       DatabaseModule,
       DatabaseModule.forFeature([{ name: UserDocument.name, schema: UserSchema }]),
