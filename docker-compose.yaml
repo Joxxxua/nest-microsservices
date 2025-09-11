@@ -1,5 +1,4 @@
 services:
-  # Serviço da sua aplicação NestJS
   reservations:
     build:
       context: .
@@ -12,10 +11,9 @@ services:
     volumes:
       - .:/usr/src/app
       - /usr/src/app/node_modules
-    # Esta é a forma correta de passar a URI para o container
-    environment:
-      NODE_ENV: production
-      MONGODB_URI: mongodb://mongodb:27017/reservations
+
+    env_file:
+      - ./apps/reservations/.env
     depends_on:
       - mongodb
 
@@ -31,13 +29,11 @@ services:
     volumes:
       - .:/usr/src/app
       - /usr/src/app/node_modules
-    environment:
-      NODE_ENV: production
-      MONGODB_URI: mongodb://mongodb:27017/auth 
-      PORT: 3001 # 
+    env_file:
+      - ./apps/auth/.env
     depends_on:
       - mongodb
-  # Serviço do Banco de Dados MongoDB
+
   mongodb:
     image: mongo:6
     container_name: mongo_db
@@ -47,6 +43,5 @@ services:
       - mongodb_data:/data/db
     restart: always
 
-# Seção de volumes, no nível principal
 volumes:
   mongodb_data: {}
